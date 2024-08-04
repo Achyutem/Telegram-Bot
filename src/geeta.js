@@ -1,3 +1,5 @@
+// thanks to api from Pt. Prashant Tripathi.
+// https://github.com/vedicscriptures/bhagavad-gita-api
 const fetch = require('node-fetch-commonjs');
 
 const MAX_SHLOKAS = [0, 46, 72, 43, 42, 29, 47, 30, 28, 34, 42, 55, 20, 35, 27, 20, 24, 28, 78];
