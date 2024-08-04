@@ -72,4 +72,15 @@ bot.on('message', async (message) => {
             }
         }
     }
+
+    if (messageText.startsWith('/calc')) {
+        const expression = messageText.substring(6).trim(); // Extract the expression after '/calc '
+        
+        if (!expression) {
+            await bot.sendMessage(chatId, 'Please provide a mathematical expression to calculate.');
+        } else {
+            const responseMessage = calculate(expression);
+            await bot.sendMessage(chatId, responseMessage);
+        }
+    }
 });

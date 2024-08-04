@@ -1,5 +1,7 @@
 const fetch = require('node-fetch-commonjs');
 const dotenv = require('dotenv');
+const path = require('path')
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const API_KEY = process.env.WEATHER_API_KEY;
 
 async function fetchForecast(cityName) {
