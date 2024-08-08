@@ -13,8 +13,12 @@ const keywords = {
     'ram ram': 'Ram Ram',
     'hello': 'Ram Ram'
 };
+const tem = new Date().toLocaleTimeString()
 
-bot.on('message', async (message) => {
+bot.on('text', async (message) => {
+
+  console.log(`Message from ${message.from.username} at ${tem}\n Message: ${message.text}\n Chat: ${message.chat.title}`)
+    
     const chatId = message.chat.id;
     const messageText = message.text?.toLowerCase();
     const calcText = message.text
