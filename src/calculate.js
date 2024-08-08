@@ -10,4 +10,4 @@ function calculate(expression) {
     return `Equation: ${expression}\nResult: ${result}`;
 }
 
-module.exports = calculate;
+module.exports = { calculate };

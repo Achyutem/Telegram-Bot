@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const { fetchForecast, fetchWeather } = require('./weather');
 const { stoicism } = require('./quotes');
 const { geeta } = require('./geeta');
-
+const { calculate } = require('./calculate')
 dotenv.config();
 
 const TOKEN = process.env.TOKEN;
@@ -16,17 +16,18 @@ const keywords = {
 
 bot.on('message', async (message) => {
     const chatId = message.chat.id;
-    const messageText = message.text.toLowerCase();
+    const messageText = message.text?.toLowerCase();
+    const calcText = message.text
 
     // Keyword responses
     for (const [keyword, response] of Object.entries(keywords)) {
-        if (messageText.includes(keyword)) {
+        if (messageText?.includes(keyword)) {
             await bot.sendMessage(chatId, response);
         }
     }
 
     // Command handling
-    if (messageText.startsWith('/quote')) {
+    if (messageText?.startsWith('/quote')) {
         try {
             const quote = await stoicism();
             await bot.sendMessage(chatId, quote);
@@ -35,7 +36,7 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (messageText.startsWith('/geeta')) {
+    if (messageText?.startsWith('/geeta')) {
         try {
             const geetaVerse = await geeta();
             await bot.sendMessage(chatId, geetaVerse);
@@ -44,7 +45,7 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (messageText.startsWith('/forecast')) {
+    if (messageText?.startsWith('/forecast')) {
         const cityName = messageText.substring(9).trim();
         if (!cityName) {
             await bot.sendMessage(chatId, 'Please provide a city name for the forecast command.');
@@ -59,7 +60,7 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (messageText.startsWith('/weather')) {
+    if (messageText?.startsWith('/weather')) {
         const cityName = messageText.substring(8).trim();
         if (!cityName) {
             await bot.sendMessage(chatId, 'Please provide a city name for the weather command.');
@@ -73,8 +74,8 @@ bot.on('message', async (message) => {
         }
     }
 
-    if (messageText.startsWith('/calc')) {
-        const expression = messageText.substring(6).trim(); // Extract the expression after '/calc '
+    if (messageText?.startsWith('/calc')) {
+        const expression = calcText.substring(6).trim(); // Extract the expression after '/calc '
         
         if (!expression) {
             await bot.sendMessage(chatId, 'Please provide a mathematical expression to calculate.');
